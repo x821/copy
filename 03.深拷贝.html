@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷贝</title>
+    <!-- 
+        深：把一个对象中的属性和方法一个个的找到，并且在另一个对象中开辟相应的空间，一个个的存储进去
+
+        好处和不足：
+        1.复制中更加的严谨，不会出问题
+        2.复制效率低
+     -->
+</head>
+<body>
+    <!-- 演示 -->
+    <script>
+        //创建一个对象
+        var obj1 = {
+            age:10,
+            sex:"f",
+            car:["法拉利","玛莎卡迪","布加迪威龙"],
+            dog:{//对象
+                name:"卡拉",
+                age:3,
+                color:"pink"
+            }
+        };
+
+        //创建一个空对象
+        var obj2 = {};
+
+        //封装一个方法，用于拷贝
+        function extend(a, b){//从a到b
+            //遍历同时进行复制
+            for(var key in a){
+                //1.获取a中的所有的属性的值
+                var item = a[key];
+                //2.判断这个值的类型是不是数组 - 遍历
+                if(item instanceof Array){//过滤数组
+                    //开辟数组空间
+                    b[key] = [];
+                    //调用这个函数，把a中的数组的属性一个个的赋值到b对象的数组中的
+                    extend(item, b[key]);//item是数组类型
+                }else if(item instanceof Object){//过滤对象类型
+                    //开辟一个对象类型的空间
+                    b[key] = {};
+                    //调用这个函数进行遍历
+                    extend(item, b[key]);//item是对象类型
+                }else{
+                    //普通类型
+                    b[key] = item;//item是属性
+                }
+            }
+        }
+
+        //调用方法
+        extend(obj1, obj2);
+        console.dir(obj2);
+        console.dir(obj1);
+    </script>
+</body>
+</html>

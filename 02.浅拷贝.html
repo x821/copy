@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浅拷贝</title>
+    <!-- 
+        浅拷贝：相当于把一个对象中所有的属性和方法（数据）复制到另一个对象中或者是把一个对象的地址值复制
+        给另一个对象，他们的指向相同，两个对象就有共同的属性和方法。
+     -->
+</head>
+<body>
+    <!-- 演示 -->
+    <script>
+        //对象
+        var obj1 = {
+            age:10,
+            sex:"男",
+            car:["自行车","三轮车","面包车"]
+        };
+        //创建一个空的对象 - 对象是存在的，但是没有数据
+        var obj2 = {};
+        console.log(obj2);
+
+        //封装一个函数用于拷贝数据
+        function extend(a, b){//把a对象中的数据复制给b对象
+            //for-in
+            for(var key in a){
+                b[key] = a[key];
+            }
+        }
+
+        //调用函数
+        extend(obj1, obj2);
+        console.log(obj2);
+    </script>
+</body>
+</html>

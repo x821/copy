@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拷贝继承</title>
+    <!-- 
+        拷贝就是复制，在js中拷贝分为深拷贝和浅拷贝
+        拷贝继承就是在原型的基础上进行的。
+     -->
+</head>
+<body>
+    <!-- 演示 -->
+    <script>
+        //构造函数
+        function Person(){
+
+        }
+        //在原型中添加数据 - 共享
+        Person.prototype.age  = 20;
+        Person.prototype.sex = "男";
+        Person.prototype.height = 170;
+        Person.prototype.play = function(){
+            console.log("我们一起去爬山吧");
+        };
+
+        //拷贝继承
+        //创建一个对象 - 字面量 - json类型
+        var obj = {};
+
+        //通过for - in拷贝
+        for(var key in Person.prototype){
+            obj[key] = Person.prototype[key];
+        }
+        console.log(obj);
+        console.dir(obj);
+    </script>
+</body>
+</html>
